@@ -17,3 +17,12 @@ stages:
       - models/scaler.joblib
       - models/mini_batch_kmeans.joblib
       - data/processed/features.csv
+
+  feature_processing:
+    cmd: python src/features/feature_processing.py
+    deps:
+      - src/features/feature_processing.py
+      - data/processed/features.csv
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv  

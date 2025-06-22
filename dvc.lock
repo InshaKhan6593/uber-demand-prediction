@@ -33,3 +33,23 @@ stages:
       hash: md5
       md5: cf2c91f3d39deba23298c30d93d06ce6
       size: 951
+  feature_processing:
+    cmd: python src/features/feature_processing.py
+    deps:
+    - path: data/processed/features.csv
+      hash: md5
+      md5: 9bf0ca2ec71a0ca367e72107e6223168
+      size: 8367453
+    - path: src/features/feature_processing.py
+      hash: md5
+      md5: cf427ef025e8fd50230c471bc3080b1d
+      size: 894
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 1d0e2d755c2ab12f8c3cec4544a56dd1
+      size: 5125788
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 024ced93ed1af68d905d08dbd3594c87
+      size: 9796205
