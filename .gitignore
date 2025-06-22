@@ -88,3 +88,6 @@ target/
 .mypy_cache/
 
 /myenv/
+
+/data/raw/
+/data/interim/

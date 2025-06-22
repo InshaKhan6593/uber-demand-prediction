@@ -1,0 +1,35 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data/data_ingestion.py
+    deps:
+    - path: src/data/data_ingestion.py
+      hash: md5
+      md5: 8ef59d75b46995631d6145e21bcf334a
+      size: 2026
+  extract_features:
+    cmd: python src/features/extract_features.py
+    deps:
+    - path: src/features/extract_features.py
+      hash: md5
+      md5: 2a6f0be289ae9d5bb209795e72aa71c4
+      size: 2097
+    params:
+      params.yaml:
+        extract_features.ewma.alpha: 0.4
+        extract_features.mini_batch_kmeans.n_clusters: 30
+        extract_features.mini_batch_kmeans.n_init: 10
+        extract_features.mini_batch_kmeans.random_state: 42
+    outs:
+    - path: data/processed/features.csv
+      hash: md5
+      md5: 9bf0ca2ec71a0ca367e72107e6223168
+      size: 8367453
+    - path: models/mini_batch_kmeans.joblib
+      hash: md5
+      md5: c09bca6a2d0f6d0c648777b67acce751
+      size: 143771
+    - path: models/scaler.joblib
+      hash: md5
+      md5: cf2c91f3d39deba23298c30d93d06ce6
+      size: 951
