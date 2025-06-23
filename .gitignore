@@ -91,3 +91,4 @@ target/
 
 /data/raw/
 /data/interim/
+/run_information.json

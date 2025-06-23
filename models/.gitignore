@@ -1,2 +1,4 @@
 /scaler.joblib
 /mini_batch_kmeans.joblib
+/transformer.joblib
+/model.joblib

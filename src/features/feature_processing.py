@@ -19,8 +19,8 @@ if __name__ == "__main__":
     df.dropna(inplace=True)
     df.set_index("15min_bins",inplace=True)
 
-    train_data = df.loc[df["month"].isin([1,2]),:]    
-    test_data = df.loc[df["month"] == 3,:]
+    train_data = df.loc[df["month"].isin([1,2]),:].drop(columns="month")    
+    test_data = df.loc[df["month"] == 3,:].drop(columns="month") 
 
     train_data.to_csv(root_dir/"data"/"processed"/"train.csv",index=True)
     test_data.to_csv(root_dir/"data"/"processed"/"test.csv",index=True)
