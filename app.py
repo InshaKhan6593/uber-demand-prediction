@@ -174,7 +174,7 @@ if date and time:
         progress_bar.empty()
 
         input_data = df.loc[index,:]
-        input_data = input_data.loc[input_data["region"].isin(desired_region)].sort_values(by="region")
+        input_data = input_data.loc[input_data["region"].isin(desired_region),:].sort_values(by="region")
         target = input_data["total_pickups"]
 
         prediction = pipe.predict(input_data.drop(columns="total_pickups"))
@@ -182,7 +182,7 @@ if date and time:
         st.markdown("### Map Legend")
 
         for idx in range(0,9):
-            color = colors[desired_region[idx]]
+            color = region_colors[desired_region[idx]]
             demand = prediction[idx]
             if region == desired_region[idx]:
                 region_id = f"{desired_region[idx]} (Current region)"
