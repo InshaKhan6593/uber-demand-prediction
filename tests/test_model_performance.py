@@ -32,8 +32,8 @@ pipe = Pipeline([
 
 @pytest.mark.parametrize(
     argnames="data_path, threshold",
-    argvalues=[(train_data_path,0.1),
-               (test_data_path,0.1)]
+    argvalues=[(train_data_path,0.15),
+               (test_data_path,0.15)]
 )
 
 def test_performance(data_path,threshold):

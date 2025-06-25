@@ -8,11 +8,6 @@ dagshub.init(repo_owner='InshaKhan6593', repo_name='uber-demand-prediction', mlf
 
 mlflow.set_tracking_uri("https://dagshub.com/InshaKhan6593/uber-demand-prediction.mlflow")
 
-def load_model_info(path):
-    with open(path,"r") as file:
-        run_info = json.load(file)
-    return run_info  
-
 model_name = "uber_demand_prediction"
 stage = "Staging"
 @pytest.mark.parametrize(argnames="model_name,stage",
