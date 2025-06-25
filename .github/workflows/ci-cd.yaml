@@ -47,5 +47,7 @@ jobs:
 
       - name: Promote-Model
         if: success()
+        env:
+          DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           python promote_model.py  
