@@ -50,4 +50,18 @@ jobs:
         env:
           DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
-          python promote_model.py  
+          python promote_model.py 
+
+      - name: Build Docker Image
+        run: |
+          docker build -t uber-demand-prediction:latest .
+
+      - name: Log in to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }}
+
+      - name: Push Image to Docker Hub  
+        if: success()
+        run: |
+          docker tag uber-demand-prediction:latest ${{ secrets.DOCKER_USERNAME }}/uber-demand-prediction:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/uber-demand-prediction:latest
