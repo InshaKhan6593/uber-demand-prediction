@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /home/ubuntu/app
+
 # === Load .env into environment ===
 # this exports every key=value in .env
 if [ -f .env ]; then
