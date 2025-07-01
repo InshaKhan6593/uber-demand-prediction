@@ -70,10 +70,15 @@ jobs:
         run: |
           docker tag uber-demand:latest 476114157013.dkr.ecr.eu-north-1.amazonaws.com/uber-demand:latest
           docker push 476114157013.dkr.ecr.eu-north-1.amazonaws.com/uber-demand:latest
-      
+      - name: Create .env for container
+        run: |
+          echo "DAGSHUB_USER_TOKEN=${{ secrets.DAGSHUB_TOKEN }}" > .env
+
       - name: Zip files for Deployment
         run: |
-          zip -r deployment.zip appspec.yml deploy/scripts/install_dependencies.sh deploy/scripts/start_docker.sh
+          zip -r deployment.zip appspec.yml deploy/scripts/install_dependencies.sh \
+          deploy/scripts/start_docker.sh \
+          .env
 
       - name: Pushing deployment.zip to s3 bucket 
         run: |
