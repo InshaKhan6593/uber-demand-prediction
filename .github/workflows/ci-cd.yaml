@@ -26,7 +26,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
+          aws-region: us-east-1
 
       - name: DVC PULL
         run: |
@@ -62,14 +62,13 @@ jobs:
       
       - name: Log in to ECR
         run: |
-          aws ecr get-login-password --region eu-north-1 | \
-          docker login --username AWS --password-stdin 476114157013.dkr.ecr.eu-north-1.amazonaws.com
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 476114157013.dkr.ecr.us-east-1.amazonaws.com
 
       - name: Push Image to ECR  
         if: success()
         run: |
-          docker tag uber-demand:latest 476114157013.dkr.ecr.eu-north-1.amazonaws.com/uber-demand:latest
-          docker push 476114157013.dkr.ecr.eu-north-1.amazonaws.com/uber-demand:latest
+          docker tag uber-demand:latest 476114157013.dkr.ecr.us-east-1.amazonaws.com/uber-app/insha:latest
+          docker push 476114157013.dkr.ecr.us-east-1.amazonaws.com/uber-app/insha:latest
       - name: Create .env for container
         run: |
           echo "DAGSHUB_USER_TOKEN=${{ secrets.DAGSHUB_TOKEN }}" > .env
@@ -92,4 +91,4 @@ jobs:
           --deployment-config-name CodeDeployDefault.OneAtATime \
           --s3-location bucket=uber-demand-codedeploy-bucket-insha,key=deployment.zip,bundleType=zip \
           --file-exists-behavior OVERWRITE \
-          --region eu-north-1
+          --region us-east-1
