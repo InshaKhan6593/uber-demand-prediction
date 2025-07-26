@@ -62,13 +62,13 @@ jobs:
       
       - name: Log in to ECR
         run: |
-          aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 476114157013.dkr.ecr.us-east-1.amazonaws.com
+          aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 476114157013.dkr.ecr.eu-north-1.amazonaws.com
 
       - name: Push Image to ECR  
         if: success()
         run: |
-          docker tag uber-demand:latest 476114157013.dkr.ecr.eu-north-1.amazonaws.com/uber-demand
-          docker push 476114157013.dkr.ecr.eu-north-1.amazonaws.com/uber-demand
+          docker tag uber-demand:latest 476114157013.dkr.ecr.eu-north-1.amazonaws.com/uber-demand:latest
+          docker push 476114157013.dkr.ecr.eu-north-1.amazonaws.com/uber-demand:latest
       - name: Create .env for container
         run: |
           echo "DAGSHUB_USER_TOKEN=${{ secrets.DAGSHUB_TOKEN }}" > .env
